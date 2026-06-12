@@ -102,52 +102,17 @@ class Trie {
         }
     }
 
-    // DELETE
-    delete(word) {
 
-        this.deleteWord(this.root, word, 0)
-    }
-
-    // DELETE RECURSIVE
-    deleteWord(node, word, index) {
-
-        // WORD NOT FOUND
-        if (!node) {
-            return false
+     delete(word){
+        let node = this.root
+        for(let char of word){
+            if(!node.children[char]) return -1
+            node = node.children[char]
         }
 
-        // END OF WORD
-        if (index === word.length) {
-
-            // Word does not exist
-            if (!node.isEndWord) {
-                return false
-            }
-
-            node.isEndWord = false
-
-            // If no children, delete node
-            return Object.keys(node.children).length === 0
-        }
-
-        let char = word[index]
-
-        let childNode = node.children[char]
-
-        let shouldDeleteChild =
-            this.deleteWord(childNode, word, index + 1)
-
-        if (shouldDeleteChild) {
-
-            delete node.children[char]
-
-            return (
-                Object.keys(node.children).length === 0 &&
-                !node.isEndWord
-            )
-        }
-
-        return false
+        if(node.isEndOfWord){
+            node.isEndOfWord = false
+        }else return -1
     }
 }
 

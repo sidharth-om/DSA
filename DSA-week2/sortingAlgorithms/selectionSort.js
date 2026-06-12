@@ -1,3 +1,14 @@
+// Start from the first element.
+
+// Find the smallest element in the remaining unsorted part of the array.
+
+// Swap it with the first element of the unsorted part.
+
+// Move to the next element and repeat the process.
+
+// Continue until the entire array is sorted.
+
+
 function selectionSort(arr) {
 
     for (let i = 0; i < arr.length - 1; i++) {

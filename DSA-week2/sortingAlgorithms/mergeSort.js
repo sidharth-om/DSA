@@ -1,3 +1,14 @@
+// Divide:
+
+// If the array has one or zero elements, return it (already sorted).
+
+// Otherwise, split the array into two halves (left and right).
+
+// Recursively sort both halves using Merge Sort.
+
+// Merge the two sorted halves into a single sorted array.
+
+
 function mergeSort(arr) {
 
     if (arr.length < 2) {

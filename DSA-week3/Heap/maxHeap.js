@@ -1,105 +1,50 @@
-class MaxHeap {
-
-    constructor() {
-        this.heap = []
+class Heap {
+    constructor(array=[]){
+        this.heap = array
+        this.buildHeap()
     }
 
-    // INSERT
-    insert(value) {
-
-        this.heap.push(value)
-
-        this.heapifyUp()
+    getLeftChildInd(index){
+        return (index*2)+1
     }
 
-    heapifyUp() {
+    getRightChildInd(index){
+        return (index*2)+2
+    }
 
-        let index = this.heap.length - 1
+    getParent(index){
+        return Math.floor((index -1)/2)
+    }
 
-        while (index > 0) {
-
-            let parentIndex = Math.floor((index - 1) / 2)
-
-            if (this.heap[parentIndex] < this.heap[index]) {
-
-                [this.heap[parentIndex], this.heap[index]] =
-                [this.heap[index], this.heap[parentIndex]]
-
-                index = parentIndex
-
-            } else {
-
-                break
-            }
+    buildHeap(){
+        for(let i = this.getParent(this.heap.length - 1);i>=0;i--){
+            this.heapifyUp(i)
         }
     }
 
-    // REMOVE MAX
-    remove() {
+    heapifyUp(index){
+        let highest = index
+        let left = this.getLeftChildInd(index)
+        let right = this.getRightChildInd(index)
 
-        if (this.heap.length === 0) {
-            return null
+        if(left < this.heap.length && this.heap[left] > this.heap[highest]){
+            highest = left
         }
 
-        if (this.heap.length === 1) {
-            return this.heap.pop()
+        if(right < this.heap.length && this.heap[right] > this.heap[highest]){
+            highest = right
         }
 
-        const max = this.heap[0]
-
-        this.heap[0] = this.heap.pop()
-
-        this.heapifyDown(0)
-
-        return max
-    }
-
-    heapifyDown(index) {
-
-        let largest = index
-
-        let left = 2 * index + 1
-
-        let right = 2 * index + 2
-
-        if (
-            left < this.heap.length &&
-            this.heap[left] > this.heap[largest]
-        ) {
-            largest = left
-        }
-
-        if (
-            right < this.heap.length &&
-            this.heap[right] > this.heap[largest]
-        ) {
-            largest = right
-        }
-
-        if (largest !== index) {
-
-            [this.heap[index], this.heap[largest]] =
-            [this.heap[largest], this.heap[index]]
-
-            this.heapifyDown(largest)
+        if(highest !== index){
+            [this.heap[index],this.heap[highest]] = [this.heap[highest],this.heap[index]]
+            this.heapifyUp(highest)
         }
     }
 
-    display() {
+    display(){
         console.log(this.heap)
     }
 }
 
-const heap = new MaxHeap()
-
-heap.insert(10)
-heap.insert(20)
-heap.insert(30)
-heap.insert(40)
-heap.insert(50)
-
-heap.display()
-
-console.log("Removed:", heap.remove())
-
-heap.display()
+const maxHeap = new Heap([10,5,25,3,30,22,12])
+maxHeap.display()

@@ -111,12 +111,6 @@ console.log(Factorial(5))
 // fibinnocci Recursion
 
 
-function fibinnocci(n){
-    if(n<2)return n
-    return fibinnocci(n-1)+fibinnocci(n-2)
-}
-
-console.log(fibinnocci(6))
 
 
 // STRING REVERSE IN RECURSIVE FUNCTION
@@ -136,23 +130,28 @@ console.log(BackPrint("RigidBorn"))
 // Recursive BinarySearch
 
 
-function recursiveBinarySearch(arr,target){
+function recursiveBinary(arr,target){
     return search(arr,target,0,arr.length-1)
-    
 }
-function search(arr,target,leftindex,rightindex){
-    if(leftindex>rightindex){
+
+function search(arr,target,left,right){
+    if(left>right){
         return -1
     }
-    let middileindex=Math.floor((leftindex+rightindex)/2)
-    if(target==arr[middileindex]){
-        return middileindex
+    
+    let midIndex=Math.floor((left+right)/2)
+    
+    if(arr[midIndex]===target){
+        return midIndex
     }
-    if(target<arr[middileindex]){
-        return search(arr,target,leftindex,middileindex-1)
+    
+    if(target<arr[midIndex]){
+        return search(arr,target,left,midIndex-1)
     }else{
-        return search(arr,target,middileindex+1,rightindex)
+        return search(arr,target,midIndex+1,right)
     }
 }
 
-console.log(recursiveBinarySearch([-5,2,3,4,6,9,10,13],9))
+let ar=[1,2,3,4,5,6,7,8]
+
+console.log(recursiveBinary(ar,9))
